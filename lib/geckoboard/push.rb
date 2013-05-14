@@ -28,11 +28,16 @@ module Geckoboard
       raise Geckoboard::Push::Error.new(result["error"]) unless result["success"]
       result["success"]
     end
-
-    # Value and previous value should be numeric values
-    def number_and_secondary_value(value, previous_value)
-      self.push(:item => [{:text => "", :value => value}, {:text => "", :value => previous_value}])
+        
+    def number_and_secondary_value(value, previous_value, opts)
+      d = { :item => [{:text => "", :value => value}, {:text => "", :value => previous_value}] }
+      self.push(d.merge(opts))
     end
+    
+    # Value and previous value should be numeric values
+    #def number_and_secondary_value(value, previous_value)
+    #  self.push(:item => [{:text => "", :value => value}, {:text => "", :value => previous_value}])
+    #end
 
     # Items should be an array of hashes, each hash containing:
     # - text
@@ -51,17 +56,25 @@ module Geckoboard
       end
       self.push(:item => data)
     end
-
+    
+    def rag(values,labels)
+      self.push(:item => [{:value => values[0],:text => labels[0]}, {:value => values[1],:text => labels[1]}, {:value => values[2],:text => labels[2] }])
+    end
+    
     # Red, amber and green should be values
-    def rag(red, amber, green)
-      self.push(:item => [{:value => red}, {:value => amber}, {:value => green}])
+    #def rag(red, amber, green)
+    #  self.push(:item => [{:value => red}, {:value => amber}, {:value => green}])
+    #end
+    
+    def line(values, colour, x_axis, y_axis)
+      self.push(:item => values, :settings => {:axisx => x_axis, :axisy => y_axis, :colour => colour})
     end
 
     # Values should be an array of numeric values
     # Colour, x_axis and y_axis are optional settings
-    def line(values, colour = nil, x_axis = nil, y_axis = nil)
-      self.push(:item => values, :settings => {:axisx => x_axis, :axisy => y_axis, :colour => colour})
-    end
+    #def line(values, colour = nil, x_axis = nil, y_axis = nil)
+    #  self.push(:item => values, :settings => {:axisx => x_axis, :axisy => y_axis, :colour => colour})
+    #end
 
     # Items should be an array of hashes, each hash containing:
     # - value (numeric value)
