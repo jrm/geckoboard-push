@@ -111,7 +111,8 @@ module Geckoboard
       items = opts.delete(:items)
       title = opts.delete(:title)
       chart = <<-EOS
-      {
+      {"highchart" : "
+        {
           chart: {
               backgroundColor: 'rgba(255, 255, 255, 0)',
               plotBackgroundColor: null,
@@ -151,6 +152,7 @@ module Geckoboard
               type: 'pie',
               data: #{items.map {|d| [ d[:label], d[:value] ]}.to_json}
           }]
+        }"
       }
       EOS
       self.push(chart)
@@ -174,7 +176,8 @@ module Geckoboard
          '#a6c96a'
       ]
       chart = <<-EOS
-      {
+      {"highchart": 
+        "{
               chart: {
                   backgroundColor: 'rgba(255, 255, 255, 0)',
                   type: 'bar'
@@ -234,7 +237,8 @@ module Geckoboard
                   }
               },
               series: #{series.to_json}
-      }
+            }"
+          }
       EOS
       self.push(chart)
     end
@@ -243,7 +247,8 @@ module Geckoboard
       title = opts.delete :title
       series = opts.delete :series
       chart = <<-EOS
-      {
+      {"highchart": 
+          "{
                   chart: {
                       type: 'pie',
                       backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -318,14 +323,14 @@ module Geckoboard
                           }
                       }
                   }]
-              }
-
+              }"
+          }
       EOS
       self.push(chart)
     end
     
     def highcharts_custom(chart)
-      self.push(chart.to_json)
+      self.push(chart)
     end
     
   end
