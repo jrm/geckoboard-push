@@ -153,7 +153,7 @@ module Geckoboard
           }]
         }
       EOS
-      self.push({:highcart => chart})
+      self.push({:highchart => chart})
     end
 
     def highcharts_stacked_bar(opts)
@@ -236,7 +236,7 @@ module Geckoboard
               series: #{series.to_json}
             }
       EOS
-      self.push({:highcart => chart})
+      self.push({:highchart => chart})
     end
 
     def highcharts_two_pie(opts)
