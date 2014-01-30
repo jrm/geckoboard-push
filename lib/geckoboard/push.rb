@@ -111,5 +111,9 @@ module Geckoboard
       self.push({:highchart => chart})
     end
     
+    def map(points)
+      self.push({:points => {:point => points}})
+    end
+    
   end
 end
