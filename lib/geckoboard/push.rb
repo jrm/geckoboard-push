@@ -119,5 +119,14 @@ module Geckoboard
       self.push({:points => {:point => points}})
     end
     
+    def monitor(status, downtime, response)
+      opts = {
+        "status" => status,
+        "downTime" => downtime,
+        "responseTime" => response
+      }
+      self.push(opts)
+    end
+    
   end
 end
