@@ -82,7 +82,7 @@ module Geckoboard
     # - colour (optional)
     def pie(items)
       data = items.collect do |item|
-        {:value => item[:value], :label => item[:label], :color => item[:color]}
+        {:value => item[:value], :label => item[:label], :colour => item[:colour]}
       end
       self.push(:item => data)
     end
